@@ -1,5 +1,12 @@
 # Top 10 Design Inspirations for Funding Catalyst Redesign
 
+> **Note:** The "Visual Language Synthesis" section below is an early-stage recommendation and is now **out of date**. The final implementation uses:
+> - **Source Serif 4** (headlines) + **Plus Jakarta Sans** (body/UI) — not Playfair/DM Serif/Inter
+> - Accent `#79BDE9` — not coral
+> - McKinsey-inspired minimal hero with a maple-leaf mark — not a dark gradient/dashboard hero
+>
+> The pattern observations per site remain useful as reference.
+
 ## New-Age Website Design Patterns (2026)
 
 The common thread across all 10: **minimal copy, massive visual impact, trust signals baked into layout.**

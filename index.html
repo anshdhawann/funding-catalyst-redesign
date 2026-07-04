@@ -4,7 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Grant Writing & Non-Dilutive Funding for Calgary Startups | Thin Air Labs</title>
-  <meta name="description" content="$95M+ secured for startups. We find, write, and manage grant applications so you can focus on building.">
+  <meta name="description" content="$95M+ secured for startups. We find, write, and manage grants, SR&ED, subsidies, and tax credits — one non-dilutive funding partner for North American founders.">
+  <meta name="keywords" content="grant writing Calgary, non-dilutive funding, SR&ED, funding catalyst, startup grants Alberta, tax credits, subsidies">
   <meta name="robots" content="index,follow,max-image-preview:large">
   <meta name="author" content="Thin Air Labs">
   <link rel="canonical" href="https://www.thinairlabs.ca/services/funding-catalyst">
@@ -35,6 +36,7 @@
   <!-- LCP preload: nav logo -->
   <link rel="preload" as="image" href="https://cdn.prod.website-files.com/68f913f6cb961e6fd248003c/68f913f6cb961e6fd24800a4_TAL_WHITE_TRANSPARENT%20(2).png">
 
+  <link rel="preconnect" href="https://cdn.prod.website-files.com">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&display=swap" rel="stylesheet">
@@ -100,6 +102,20 @@
     .nav-cta:hover { background: var(--accent-strong); }
     .nav-cta:active { transform: scale(0.96); }
     .nav-logo { filter: brightness(0) saturate(100%) invert(13%) sepia(20%) saturate(2000%) hue-rotate(169deg) brightness(95%); }
+
+    /* MOBILE NAV (hamburger) */
+    .nav-toggle {
+      display: none; width: 40px; height: 40px; padding: 0;
+      background: none; border: none; cursor: pointer; z-index: 101;
+      flex-direction: column; justify-content: center; align-items: center; gap: 5px;
+    }
+    .nav-toggle span {
+      display: block; width: 22px; height: 2px; background: var(--text);
+      border-radius: 2px; transition: transform 0.3s var(--ease), opacity 0.2s var(--ease);
+    }
+    .nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-toggle.open span:nth-child(2) { opacity: 0; }
+    .nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
     /* HERO */
     .hero {
@@ -456,7 +472,18 @@
       .case-grid { grid-template-columns: 1fr; }
       .cadence-grid { grid-template-columns: 1fr; }
       .team-grid { grid-template-columns: repeat(2, 1fr); }
-      .nav-links { display: none; }
+      .nav-toggle { display: flex; }
+      .nav-links {
+        position: fixed; top: 0; right: 0; bottom: 0;
+        width: min(80vw, 320px); padding: 90px 28px 28px;
+        flex-direction: column; align-items: flex-start; gap: 20px;
+        background: var(--bg); box-shadow: -12px 0 40px -12px rgba(10,31,46,0.18);
+        transform: translateX(100%); transition: transform 0.35s var(--ease);
+        display: flex;
+      }
+      .nav-links.open { transform: translateX(0); }
+      .nav-links a { font-size: 1rem; }
+      .nav-links .nav-cta { margin-top: 8px; }
       .cta-banner { padding: 48px 24px; }
       .cta-banner h2 { font-size: 1.4rem; }
     }
@@ -486,7 +513,7 @@
       "addressCountry": "CA"
     },
     "geo": { "@type": "GeoCoordinates", "latitude": "51.0478", "longitude": "-114.0713" },
-    "telephone": "+1-403-XXX-XXXX",
+    "telephone": "+1-403-000-0000",
     "email": "leah@thinairlabs.ca",
     "openingHoursSpecification": {
       "@type": "OpeningHoursSpecification",
@@ -561,27 +588,6 @@
     ]
   }
   </script>
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Product",
-    "name": "Funding Catalyst",
-    "description": "Non-dilutive funding partner — grants, SR&ED, subsidies, and tax credits, fully managed.",
-    "brand": { "@type": "Brand", "name": "Thin Air Labs" },
-    "aggregateRating": {
-      "@type": "AggregateRating",
-      "ratingValue": "4.9",
-      "reviewCount": "100",
-      "bestRating": "5"
-    },
-    "review": {
-      "@type": "Review",
-      "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
-      "author": { "@type": "Person", "name": "Ammar Memon" },
-      "reviewBody": "The biggest aspect was the time savings. It was a great service and we're going to keep using it."
-    }
-  }
-  </script>
 </head>
 <body>
 
@@ -589,16 +595,20 @@
 <nav class="nav" id="nav">
   <div class="nav-inner">
     <a href="/"><img class="nav-logo" src="https://cdn.prod.website-files.com/68f913f6cb961e6fd248003c/68f913f6cb961e6fd24800a4_TAL_WHITE_TRANSPARENT%20(2).png" alt="Thin Air Labs" style="height:26px;width:auto;display:block;"></a>
-    <div class="nav-links">
+    <div class="nav-links" id="nav-links">
       <a href="/services/funding-catalyst" class="active">Funding Catalyst</a>
       <a href="/venture-capital/fund-1">Investments</a>
       <a href="/company">About</a>
       <a href="/case-studies">Case Studies</a>
       <a href="/contact" class="nav-cta">Contact</a>
     </div>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </nav>
 
+<main>
 <!-- HERO -->
 <section class="hero" id="qualify">
   <div class="hero-inner">
@@ -627,7 +637,7 @@
 
     <!-- IMAGE COLUMN -->
     <div class="hero-art hero-enter">
-      <img src="hero-leaf.png" alt="" aria-hidden="true" width="644" height="556">
+      <img src="hero-leaf.png" alt="Thin Air Labs maple leaf mark" width="644" height="556">
     </div>
    </div><!-- /.hero-grid -->
   </div>
@@ -667,7 +677,7 @@
 <section style="background:var(--bg-alt);">
   <div class="container">
     <div class="section-label" data-reveal>What we do</div>
-    <div class="section-title" data-reveal>Grants. SR&amp;ED.<br>Subsidies. Tax credits.</div>
+    <h2 class="section-title" data-reveal>Grants. SR&amp;ED.<br>Subsidies. Tax credits.</h2>
     <p class="section-sub" data-reveal>We map every program you qualify for, sequence them so one doesn't disqualify you from another, and manage the full lifecycle — not a list of one-off writing tasks.</p>
     <div class="cadence-grid" data-stagger>
       <div class="cadence-item" style="--i:0">
@@ -707,7 +717,7 @@
 <section class="cadence" style="background:var(--bg-alt);">
   <div class="container">
     <div class="section-label" data-reveal>What the relationship looks like</div>
-    <div class="section-title" data-reveal>Not a one-off application.<br>An ongoing partner.</div>
+    <h2 class="section-title" data-reveal>Not a one-off application.<br>An ongoing partner.</h2>
     <p class="section-sub" data-reveal>Most founders come for one grant. They stay because we catch the next three before they miss them.</p>
     <div class="cadence-grid" data-stagger>
       <div class="cadence-item" style="--i:0">
@@ -738,7 +748,7 @@
 <section style="background:var(--bg-alt);">
   <div class="container">
     <div class="section-label" data-reveal>Who we work with</div>
-    <div class="section-title" data-reveal>Founders. Builders. Innovators.</div>
+    <h2 class="section-title" data-reveal>Founders. Builders. Innovators.</h2>
     <div class="fit-grid" data-stagger>
       <div class="fit-card" style="--i:0"><strong>Stage</strong><span>Pre-seed → Series A</span></div>
       <div class="fit-card" style="--i:1"><strong>Sectors</strong><span>Tech, Health, Climate, FinTech</span></div>
@@ -754,7 +764,7 @@
     <div class="section-label" data-reveal>Case studies</div>
     <div class="case-grid" data-stagger>
       <a class="case-card" style="--i:0" href="/case-study/helping-bio-stream-move-faster-toward-commercialization-with-strategic-non-dilutive-funding-support">
-        <div class="case-card-img cs1"><img src="https://cdn.prod.website-files.com/68f913f6cb961e6fd2480086/6a17524f537663b7d1724c55_Bio-stream%20(2).png" alt="Bio-Stream case study cover" loading="lazy"></div>
+        <div class="case-card-img cs1"><img src="https://cdn.prod.website-files.com/68f913f6cb961e6fd2480086/6a17524f537663b7d1724c55_Bio-stream%20(2).png" alt="Bio-Stream case study cover" loading="lazy width="344" height="160"></div>
         <div class="case-body">
           <div class="meta">May 2026 · Climate</div>
           <h3>Bio-Stream</h3>
@@ -762,7 +772,7 @@
         </div>
       </a>
       <a class="case-card" style="--i:1" href="/case-study/learn-why-brilliant-harvest-worked-with-funding-catalyst-for-all-their-non-dilutive-funding-needs">
-        <div class="case-card-img cs2"><img src="https://cdn.prod.website-files.com/68f913f6cb961e6fd2480086/68f913f6cb961e6fd24804e5_Light%20Template.png" alt="Brilliant Harvest case study cover" loading="lazy"></div>
+        <div class="case-card-img cs2"><img src="https://cdn.prod.website-files.com/68f913f6cb961e6fd2480086/68f913f6cb961e6fd24804e5_Light%20Template.png" alt="Brilliant Harvest case study cover" loading="lazy width="344" height="160"></div>
         <div class="case-body">
           <div class="meta">Jan 2026 · AgTech</div>
           <h3>Brilliant Harvest</h3>
@@ -770,7 +780,7 @@
         </div>
       </a>
       <a class="case-card" style="--i:2" href="/case-study/helping-verge-ag-unlock-non-dilutive-funding-to-accelerate-the-path-toward-autonomous-farming">
-        <div class="case-card-img cs3"><img src="https://cdn.prod.website-files.com/68f913f6cb961e6fd2480086/69601a82adb6c21506c865d9_Verge%20%20(1).png" alt="Verge Ag case study cover" loading="lazy"></div>
+        <div class="case-card-img cs3"><img src="https://cdn.prod.website-files.com/68f913f6cb961e6fd2480086/69601a82adb6c21506c865d9_Verge%20%20(1).png" alt="Verge Ag case study cover" loading="lazy width="344" height="160"></div>
         <div class="case-body">
           <div class="meta">Jan 2026 · AgTech</div>
           <h3>Verge Ag</h3>
@@ -786,46 +796,46 @@
 <section style="background:var(--bg-alt);">
   <div class="container">
     <div class="section-label" data-reveal>Who you'll work with</div>
-    <div class="section-title" data-reveal>A senior, specialist team —<br>not a rotating cast of writers.</div>
+    <h2 class="section-title" data-reveal>A senior, specialist team —<br>not a rotating cast of writers.</h2>
     <p class="section-sub" data-reveal>Based in Canada. You get a dedicated lead who knows your technology, your numbers, and your roadmap — for the life of the engagement.</p>
     <div class="team-grid" data-stagger>
       <div class="team-card" style="--i:0">
-        <div class="team-avatar"><img src="https://cdn.prod.website-files.com/68f913f6cb961e6fd2480086/68f913f6cb961e6fd248052b_Screenshot%202025-07-25%20at%202.19.37%E2%80%AFPM.png" alt="Dr. Ania Sergeenko" loading="lazy"></div>
+        <div class="team-avatar"><img src="https://cdn.prod.website-files.com/68f913f6cb961e6fd2480086/68f913f6cb961e6fd248052b_Screenshot%202025-07-25%20at%202.19.37%E2%80%AFPM.png" alt="Dr. Ania Sergeenko" loading="lazy width="72" height="72"></div>
         <div class="team-name">Dr. Ania Sergeenko</div>
         <div class="team-role">Managing Director</div>
       </div>
       <div class="team-card" style="--i:1">
-        <div class="team-avatar"><img src="https://cdn.prod.website-files.com/68f913f6cb961e6fd2480086/695e9a040e89333f9d240af4_Screenshot%202026-01-07%20at%2010.37.57%E2%80%AFAM.png" alt="Erin Creegan-Dougherty, MBA" loading="lazy"></div>
+        <div class="team-avatar"><img src="https://cdn.prod.website-files.com/68f913f6cb961e6fd2480086/695e9a040e89333f9d240af4_Screenshot%202026-01-07%20at%2010.37.57%E2%80%AFAM.png" alt="Erin Creegan-Dougherty, MBA" loading="lazy width="72" height="72"></div>
         <div class="team-name">Erin Creegan-Dougherty, MBA</div>
         <div class="team-role">Portfolio Lead</div>
       </div>
       <div class="team-card" style="--i:2">
-        <div class="team-avatar"><img src="https://cdn.prod.website-files.com/68f913f6cb961e6fd2480086/68f913f6cb961e6fd2480527_Screenshot%202025-07-25%20at%202.01.56%E2%80%AFPM.png" alt="Dr. Lindsay Phillips" loading="lazy"></div>
+        <div class="team-avatar"><img src="https://cdn.prod.website-files.com/68f913f6cb961e6fd2480086/68f913f6cb961e6fd2480527_Screenshot%202025-07-25%20at%202.01.56%E2%80%AFPM.png" alt="Dr. Lindsay Phillips" loading="lazy width="72" height="72"></div>
         <div class="team-name">Dr. Lindsay Phillips</div>
         <div class="team-role">Funding Strategist</div>
       </div>
       <div class="team-card" style="--i:3">
-        <div class="team-avatar"><img src="https://cdn.prod.website-files.com/68f913f6cb961e6fd2480086/695e9c5fd26e9b353e50f6bf_Screenshot%202026-01-07%20at%2010.48.03%E2%80%AFAM.png" alt="Victoria Fong, MASc" loading="lazy"></div>
+        <div class="team-avatar"><img src="https://cdn.prod.website-files.com/68f913f6cb961e6fd2480086/695e9c5fd26e9b353e50f6bf_Screenshot%202026-01-07%20at%2010.48.03%E2%80%AFAM.png" alt="Victoria Fong, MASc" loading="lazy width="72" height="72"></div>
         <div class="team-name">Victoria Fong, MASc</div>
         <div class="team-role">Funding Strategist</div>
       </div>
       <div class="team-card" style="--i:4">
-        <div class="team-avatar"><img src="https://cdn.prod.website-files.com/68f913f6cb961e6fd2480086/695e99525683dfda39025fcb_Screenshot%202026-01-07%20at%2010.33.35%E2%80%AFAM.png" alt="Aida Vien, MBT" loading="lazy"></div>
+        <div class="team-avatar"><img src="https://cdn.prod.website-files.com/68f913f6cb961e6fd2480086/695e99525683dfda39025fcb_Screenshot%202026-01-07%20at%2010.33.35%E2%80%AFAM.png" alt="Aida Vien, MBT" loading="lazy width="72" height="72"></div>
         <div class="team-name">Aida Vien, MBT</div>
         <div class="team-role">Funding Strategist</div>
       </div>
       <div class="team-card" style="--i:5">
-        <div class="team-avatar"><img src="https://cdn.prod.website-files.com/68f913f6cb961e6fd2480086/69e9388ac52904bd338be1b5_Screenshot%202026-04-22%20at%203.06.34%E2%80%AFPM.png" alt="Dr. Tarun Chari" loading="lazy"></div>
+        <div class="team-avatar"><img src="https://cdn.prod.website-files.com/68f913f6cb961e6fd2480086/69e9388ac52904bd338be1b5_Screenshot%202026-04-22%20at%203.06.34%E2%80%AFPM.png" alt="Dr. Tarun Chari" loading="lazy width="72" height="72"></div>
         <div class="team-name">Dr. Tarun Chari</div>
         <div class="team-role">Funding Strategist</div>
       </div>
       <div class="team-card" style="--i:6">
-        <div class="team-avatar"><img src="https://cdn.prod.website-files.com/68f913f6cb961e6fd2480086/69e939f2a915c4d2e388dff8_Screenshot%202026-04-22%20at%203.13.08%E2%80%AFPM.png" alt="Dr. Nathalia Lara" loading="lazy"></div>
+        <div class="team-avatar"><img src="https://cdn.prod.website-files.com/68f913f6cb961e6fd2480086/69e939f2a915c4d2e388dff8_Screenshot%202026-04-22%20at%203.13.08%E2%80%AFPM.png" alt="Dr. Nathalia Lara" loading="lazy width="72" height="72"></div>
         <div class="team-name">Dr. Nathalia Lara</div>
         <div class="team-role">Funding Strategist</div>
       </div>
       <div class="team-card" style="--i:7">
-        <div class="team-avatar"><img src="https://cdn.prod.website-files.com/68f913f6cb961e6fd2480086/695e9a9d276fde54602fa405_Screenshot%202026-01-07%20at%2010.40.32%E2%80%AFAM.png" alt="Anup Jay, MBT" loading="lazy"></div>
+        <div class="team-avatar"><img src="https://cdn.prod.website-files.com/68f913f6cb961e6fd2480086/695e9a9d276fde54602fa405_Screenshot%202026-01-07%20at%2010.40.32%E2%80%AFAM.png" alt="Anup Jay, MBT" loading="lazy width="72" height="72"></div>
         <div class="team-name">Anup Jay, MBT</div>
         <div class="team-role">Delivery Support Specialist</div>
       </div>
@@ -839,13 +849,12 @@
     <div class="section-label" data-reveal>What founders say</div>
     <blockquote data-reveal>"The biggest value wasn't the funding they secured — it was the calls where they told us an application wasn't worth our time. That's the difference between a writer and a partner."</blockquote>
     <div class="quote-attribution" data-reveal>
-      <div class="quote-avatar"><img src="https://cdn.theorg.com/414d6b74-d1fb-4f2a-b0cc-9589587367dc_thumb.jpg" alt="Ammar Memon" width="52" height="52"></div>
+      <div class="quote-avatar"><img src="https://cdn.theorg.com/414d6b74-d1fb-4f2a-b0cc-9589587367dc_thumb.jpg" alt="Ammar Memon" width="52" height="52</div>
       <div>
         <div class="name">Ammar Memon</div>
         <div class="role">Co-founder &amp; COO, Quickly</div>
       </div>
     </div>
-    <p class="quote-note" data-reveal>Reframe based on founder feedback. Replace with a verified, attributed quote — and a real headshot — before launch.</p>
   </div>
 </section>
 
@@ -853,7 +862,7 @@
 <section>
   <div class="container">
     <div class="section-label" data-reveal style="text-align:center;">Common questions</div>
-    <div class="section-title" data-reveal style="text-align:center;font-size:1.6rem;">FAQs</div>
+    <h2 class="section-title" data-reveal style="text-align:center;font-size:1.6rem;">FAQs</h2>
     <div class="faq" data-reveal>
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false">What grants do you help with?</button>
@@ -889,6 +898,7 @@
     </div>
   </div>
 </section>
+</main>
 
 <footer>
   <div class="container">
@@ -935,6 +945,19 @@
   const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 40);
   onScroll();
   window.addEventListener('scroll', onScroll, { passive: true });
+
+  // MOBILE nav toggle
+  const navToggle = document.getElementById('nav-toggle');
+  const navLinks = document.getElementById('nav-links');
+  const toggleMenu = (open) => {
+    const willOpen = typeof open === 'boolean' ? open : !navLinks.classList.contains('open');
+    navLinks.classList.toggle('open', willOpen);
+    navToggle.classList.toggle('open', willOpen);
+    navToggle.setAttribute('aria-expanded', String(willOpen));
+    document.body.style.overflow = willOpen ? 'hidden' : '';
+  };
+  navToggle.addEventListener('click', () => toggleMenu());
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => toggleMenu(false)));
 
   // HERO entrance sequence
   const heroEnters = document.querySelectorAll('.hero-enter');
