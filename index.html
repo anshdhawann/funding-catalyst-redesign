@@ -246,8 +246,9 @@
     }
     .marquee:hover { animation-play-state: paused; }
     .marquee img {
-      height: 34px;
-      width: 130px;
+      height: 30px;
+      width: auto;
+      max-width: 160px;
       object-fit: contain;
       opacity: 0.5;
       filter: grayscale(1) opacity(0.7);
@@ -462,7 +463,7 @@
       .hero-form, .hero-form-result { margin-left: auto; margin-right: auto; }
     }
     @media (max-width: 768px) {
-      .hero { padding: 110px 20px 0; }
+      .hero { padding: 110px 20px 80px; }
       .hero h1 { font-size: 2.3rem; }
       .hero-sub { font-size: 0.98rem; }
       .hero-proof { gap: 28px; margin-top: 32px; }
@@ -636,7 +637,7 @@
 
     <!-- IMAGE COLUMN -->
     <div class="hero-art hero-enter">
-      <img src="/funding-catalyst-redesign/hero-leaf.png" alt="Thin Air Labs maple leaf mark" width="644" height="556">
+      <img src="hero-leaf.png" alt="Thin Air Labs maple leaf mark" width="644" height="556">
     </div>
    </div><!-- /.hero-grid -->
   </div>
@@ -644,30 +645,30 @@
   <div class="trust-bar">
     <div class="label">Trusted by startups across sectors</div>
     <div class="marquee">
-      <img src="https://cdn.prod.website-files.com/68f913f6cb961e6fd2480086/69695da20c4e100b09ab0df5_athennian-logo.png" alt="Athennian">
-      <img src="https://cdn.prod.website-files.com/68f913f6cb961e6fd2480086/69695d385846f0e6adc138e2_nimble-science-logo.png" alt="Nimble Science">
-      <img src="https://cdn.prod.website-files.com/68f913f6cb961e6fd2480086/698e7464105b5a348e31e85e_arbor.svg" alt="Arbor">
-      <img src="https://cdn.prod.website-files.com/68f913f6cb961e6fd2480086/698e80b8b4d57a7c83be8eb6_payshepherd.png" alt="PayShepherd">
-      <img src="https://cdn.prod.website-files.com/68f913f6cb961e6fd2480086/698e85bd8a54a082f59d3190_logo-provision.svg" alt="Provision">
-      <img src="https://cdn.prod.website-files.com/68f913f6cb961e6fd2480086/698e8afcbe8c119e5020800a_syantra.png" alt="Syantra">
-      <img src="https://cdn.prod.website-files.com/68f913f6cb961e6fd2480086/69695e56bc353efac47968a3_fillip-logo.png" alt="Fillip">
-      <img src="https://cdn.prod.website-files.com/68f913f6cb961e6fd2480086/698e8ba900c27111a235e707_true-angle.png" alt="True Angle">
-      <img src="https://cdn.prod.website-files.com/68f913f6cb961e6fd2480086/698e8d52d710879185c7a315_verge.png" alt="Verge Ag">
-      <img src="https://cdn.prod.website-files.com/68f913f6cb961e6fd2480086/68f913f6cb961e6fd2480517_ZayZoon%20Logo_Horizontal_Full%20Color.png" alt="ZayZoon">
-      <img src="https://cdn.prod.website-files.com/68f913f6cb961e6fd2480086/698e8ccf0bcdffae9bfe6ebf_varme.png" alt="Varme">
-      <img src="https://cdn.prod.website-files.com/68f913f6cb961e6fd2480086/69e8f70bf4ab40319ab52486_Copy%20of%20Carbide_Horizontal_Logo_RGB.png" alt="Carbide">
-      <img src="https://cdn.prod.website-files.com/68f913f6cb961e6fd2480086/69695da20c4e100b09ab0df5_athennian-logo.png" alt="Athennian">
-      <img src="https://cdn.prod.website-files.com/68f913f6cb961e6fd2480086/69695d385846f0e6adc138e2_nimble-science-logo.png" alt="Nimble Science">
-      <img src="https://cdn.prod.website-files.com/68f913f6cb961e6fd2480086/698e7464105b5a348e31e85e_arbor.svg" alt="Arbor">
-      <img src="https://cdn.prod.website-files.com/68f913f6cb961e6fd2480086/698e80b8b4d57a7c83be8eb6_payshepherd.png" alt="PayShepherd">
-      <img src="https://cdn.prod.website-files.com/68f913f6cb961e6fd2480086/698e85bd8a54a082f59d3190_logo-provision.svg" alt="Provision">
-      <img src="https://cdn.prod.website-files.com/68f913f6cb961e6fd2480086/698e8afcbe8c119e5020800a_syantra.png" alt="Syantra">
-      <img src="https://cdn.prod.website-files.com/68f913f6cb961e6fd2480086/69695e56bc353efac47968a3_fillip-logo.png" alt="Fillip">
-      <img src="https://cdn.prod.website-files.com/68f913f6cb961e6fd2480086/698e8ba900c27111a235e707_true-angle.png" alt="True Angle">
-      <img src="https://cdn.prod.website-files.com/68f913f6cb961e6fd2480086/698e8d52d710879185c7a315_verge.png" alt="Verge Ag">
-      <img src="https://cdn.prod.website-files.com/68f913f6cb961e6fd2480086/68f913f6cb961e6fd2480517_ZayZoon%20Logo_Horizontal_Full%20Color.png" alt="ZayZoon">
-      <img src="https://cdn.prod.website-files.com/68f913f6cb961e6fd2480086/698e8ccf0bcdffae9bfe6ebf_varme.png" alt="Varme">
-      <img src="https://cdn.prod.website-files.com/68f913f6cb961e6fd2480086/69e8f70bf4ab40319ab52486_Copy%20of%20Carbide_Horizontal_Logo_RGB.png" alt="Carbide">
+      <img src="logos/athennian.png" alt="Athennian">
+      <img src="logos/nimble_science.png" alt="Nimble Science">
+      <img src="logos/arbor.svg" alt="Arbor">
+      <img src="logos/payshepherd.png" alt="PayShepherd">
+      <img src="logos/provision.svg" alt="Provision">
+      <img src="logos/syantra.png" alt="Syantra">
+      <img src="logos/fillip.png" alt="Fillip">
+      <img src="logos/true_angle.png" alt="True Angle">
+      <img src="logos/verge_ag.png" alt="Verge Ag">
+      <img src="logos/zayzoon.png" alt="ZayZoon">
+      <img src="logos/varme.png" alt="Varme">
+      <img src="logos/carbide.png" alt="Carbide">
+      <img src="logos/athennian.png" alt="Athennian">
+      <img src="logos/nimble_science.png" alt="Nimble Science">
+      <img src="logos/arbor.svg" alt="Arbor">
+      <img src="logos/payshepherd.png" alt="PayShepherd">
+      <img src="logos/provision.svg" alt="Provision">
+      <img src="logos/syantra.png" alt="Syantra">
+      <img src="logos/fillip.png" alt="Fillip">
+      <img src="logos/true_angle.png" alt="True Angle">
+      <img src="logos/verge_ag.png" alt="Verge Ag">
+      <img src="logos/zayzoon.png" alt="ZayZoon">
+      <img src="logos/varme.png" alt="Varme">
+      <img src="logos/carbide.png" alt="Carbide">
     </div>
   </div>
 </section>
