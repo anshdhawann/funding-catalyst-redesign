@@ -10,6 +10,13 @@
   <meta name="author" content="Thin Air Labs">
   <link rel="canonical" href="https://www.thinairlabs.ca/services/funding-catalyst">
 
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+
+
   <!-- hreflang: CA + US served -->
   <link rel="alternate" hreflang="en-CA" href="https://www.thinairlabs.ca/services/funding-catalyst">
   <link rel="alternate" hreflang="en-US" href="https://www.thinairlabs.ca/services/funding-catalyst">
@@ -199,6 +206,96 @@
     .hero-form-result.show { display: block; }
     .hero-form-result.success { background: #eaf6ef; border: 1px solid #b8dcc9; color: #1f7a48; }
     .hero-form-result.no-fit { background: #fef6ec; border: 1px solid #f5dba6; color: #9a6612; }
+
+    /* STAGE 1 → 2 height-collapse wrappers (no display:none pop) */
+    .hero-form-wrap, .qualify-stage-2-wrap {
+      display: grid; grid-template-rows: 1fr; transition: grid-template-rows 0.35s var(--ease);
+    }
+    .hero-form-wrap > form, .qualify-stage-2-wrap > form {
+      overflow: hidden; min-height: 0;
+      transition: opacity 0.3s var(--ease), transform 0.3s var(--ease);
+    }
+    .hero-form-wrap.collapsed { grid-template-rows: 0fr; }
+    .qualify-stage-2-wrap { grid-template-rows: 0fr; }
+    .qualify-stage-2-wrap.open { grid-template-rows: 1fr; }
+    .qualify-stage-2-wrap > form {
+      opacity: 0; transform: translateY(8px);
+      transition: opacity 0.35s var(--ease) 0.05s, transform 0.35s var(--ease) 0.05s;
+    }
+    .qualify-stage-2-wrap.open > form { opacity: 1; transform: none; }
+
+    /* STAGE 2 form */
+    .qualify-stage-2 {
+      max-width: 460px;
+      text-align: left;
+      padding-top: 4px;
+    }
+    .qualify-stage-2-wrap.open { margin-bottom: 24px; }   /* space only when visible */
+    .stage-2-head {
+      font-size: 0.9rem; font-weight: 600; color: var(--text);
+      margin-bottom: 16px;
+    }
+    /* staggered field enter — uses inline --i (codebase convention) */
+    .qualify-stage-2 > * {
+      opacity: 0; transform: translateY(10px);
+      transition: opacity 0.45s var(--ease), transform 0.45s var(--ease);
+    }
+    .qualify-stage-2-wrap.open .qualify-stage-2 > * {
+      opacity: 1; transform: none;
+      transition-delay: calc(0.08s + var(--i, 0) * 0.06s);
+    }
+    .field { margin-bottom: 14px; }
+    .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .field > label, .field-label {
+      display: block; font-size: 0.78rem; font-weight: 600;
+      color: var(--text); margin-bottom: 5px;
+    }
+    .field .opt { font-weight: 400; color: #9aa7b4; }
+    .field label span[aria-hidden] { color: var(--accent-strong); }
+    .qualify-stage-2 input,
+    .qualify-stage-2 select,
+    .qualify-stage-2 textarea {
+      width: 100%;
+      padding: 11px 14px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: rgba(255,255,255,0.85);
+      color: var(--text);
+      font-size: 0.9rem;
+      font-family: inherit;
+      outline: none;
+      transition: border-color 0.2s var(--ease), box-shadow 0.2s var(--ease);
+    }
+    .qualify-stage-2 input:focus,
+    .qualify-stage-2 select:focus,
+    .qualify-stage-2 textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+    .qualify-stage-2 input::placeholder, .qualify-stage-2 textarea::placeholder { color: #9aa7b4; }
+    .qualify-stage-2 select { appearance: none; -webkit-appearance: none; cursor: pointer;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%235b6b7c' d='M6 8L0 0h12z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px; }
+    .qualify-stage-2 textarea { resize: vertical; }
+    .qualify-stage-2 input[aria-invalid="true"],
+    .qualify-stage-2 select[aria-invalid="true"] { border-color: #d6654a; box-shadow: 0 0 0 3px rgba(214,101,74,0.12); }
+    .check-grid { display: grid; grid-template-columns: 1fr; gap: 8px; }
+    .check-chip {
+      display: flex; align-items: center; gap: 8px;
+      padding: 9px 12px; border: 1px solid var(--border); border-radius: 8px;
+      font-size: 0.82rem; color: var(--text); cursor: pointer; user-select: none;
+      background: rgba(255,255,255,0.85); line-height: 1.3;
+      transition: border-color 0.2s var(--ease), background-color 0.2s var(--ease);
+    }
+    .check-chip input { width: auto; margin: 0; accent-color: var(--accent-strong); }
+    .check-chip:has(input:checked) { border-color: var(--accent); background: var(--accent-soft); }
+    .check-grid[aria-invalid="true"] .check-chip { border-color: #d6654a; }
+    .stage-2-submit {
+      width: 100%; padding: 13px 24px;
+      background: var(--accent); color: #fff; border: none; border-radius: 10px;
+      font-weight: 600; font-size: 0.92rem; font-family: inherit; cursor: pointer;
+      transition: background-color 0.2s var(--ease), transform 0.2s var(--ease);
+    }
+    .stage-2-submit:hover { background: var(--accent-strong); }
+    .stage-2-submit:active { transform: scale(0.98); }
+    @media (max-width: 480px) { .field-row { grid-template-columns: 1fr; } }
 
     /* IMAGE COLUMN */
     .hero-art {
@@ -450,7 +547,8 @@
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
       .marquee { animation: none; }
-      [data-reveal], [data-stagger] > *, [data-stagger].is-visible > *, .hero-enter { opacity: 1 !important; transform: none !important; transition: none !important; }
+      [data-reveal], [data-stagger] > *, [data-stagger].is-visible > *, .hero-enter, .qualify-stage-2, .qualify-stage-2 > *, .hero-form-wrap > form, .qualify-stage-2-wrap > form { opacity: 1 !important; transform: none !important; transition: none !important; }
+      .hero-form-wrap, .qualify-stage-2-wrap { transition: none !important; }
     }
 
     @media (max-width: 880px) {
@@ -616,10 +714,59 @@
     <div class="hero-text">
     <h1 class="hero-enter">For all your Non-Dilutive funding needs,<br><span class="accent">One Trusted Partner.</span></h1>
 
-    <form class="hero-form hero-enter" id="qualify-form">
-      <input type="email" id="email" placeholder="you@company.com" aria-label="Work email" required>
-      <button type="submit">See if we're a fit →</button>
-    </form>
+    <div class="hero-form-wrap hero-enter">
+      <form class="hero-form" id="qualify-form">
+        <input type="email" id="email" placeholder="you@company.com" aria-label="Work email" required>
+        <button type="submit">See if we're a fit →</button>
+      </form>
+    </div>
+
+    <!-- STAGE 2 — revealed after a valid email is entered -->
+    <div class="qualify-stage-2-wrap">
+      <form class="qualify-stage-2" id="qualify-form-2" novalidate>
+        <div class="stage-2-head" style="--i:0">✅ Great — tell us a bit more.</div>
+        <div class="field-row" style="--i:1">
+          <div class="field">
+            <label for="q2-name">Full name <span aria-hidden="true">*</span></label>
+            <input type="text" id="q2-name" name="name" autocomplete="name" required>
+          </div>
+          <div class="field">
+            <label for="q2-company">Company <span aria-hidden="true">*</span></label>
+            <input type="text" id="q2-company" name="company" autocomplete="organization" required>
+          </div>
+        </div>
+        <div class="field" style="--i:2">
+          <label for="q2-website">Company website or LinkedIn <span aria-hidden="true">*</span></label>
+          <input type="url" id="q2-website" name="website" placeholder="https://" required>
+        </div>
+        <div class="field" style="--i:3">
+          <label for="q2-region">Where is your company based? <span aria-hidden="true">*</span></label>
+          <select id="q2-region" name="funding_region" required>
+            <option value="" disabled selected>Select…</option>
+            <option value="Alberta">Alberta</option>
+            <option value="British Columbia">British Columbia</option>
+            <option value="Saskatchewan / Manitoba">Saskatchewan / Manitoba</option>
+            <option value="Ontario">Ontario</option>
+            <option value="Outside of Canada">Outside of Canada</option>
+          </select>
+        </div>
+        <div class="field" style="--i:4">
+          <span class="field-label">Which box does your company check? <span aria-hidden="true">*</span></span>
+          <div class="check-grid" id="icp-grid">
+            <label class="check-chip"><input type="checkbox" name="icp_qualifiers" value="3+ Canadian technical team"><span>3+ Canadian-based technical team / R&amp;D</span></label>
+            <label class="check-chip"><input type="checkbox" name="icp_qualifiers" value="$500k+ raised or ARR"><span>$500k+ raised OR $500k+ ARR</span></label>
+            <label class="check-chip"><input type="checkbox" name="icp_qualifiers" value="Files SR&ED yearly"><span>We file for SR&amp;ED yearly</span></label>
+            <label class="check-chip"><input type="checkbox" name="icp_qualifiers" id="icp-none" value="None of the above"><span>None of the above apply yet</span></label>
+          </div>
+        </div>
+        <div class="field" style="--i:5">
+          <label for="q2-notes">Upcoming R&amp;D projects or funding roadblocks <span aria-hidden="true">*</span></label>
+          <textarea id="q2-notes" name="discovery_notes" rows="2" placeholder="Briefly tell us about your upcoming R&D projects or current funding roadblocks." required></textarea>
+        </div>
+        <button type="submit" class="stage-2-submit" style="--i:6">Submit →</button>
+      </form>
+    </div>
+
     <div id="result-area" class="hero-form-result"></div>
 
     <!-- PROOF LINE -->
@@ -768,7 +915,7 @@
     <div class="section-label" data-reveal>Case studies</div>
     <div class="case-grid" data-stagger>
       <a class="case-card" style="--i:0" href="/case-study/helping-bio-stream-move-faster-toward-commercialization-with-strategic-non-dilutive-funding-support">
-        <div class="case-card-img cs1"><img src="https://cdn.prod.website-files.com/68f913f6cb961e6fd2480086/6a17524f537663b7d1724c55_Bio-stream%20(2).png" alt="Bio-Stream case study cover" loading="lazy width="344" height="160"></div>
+        <div class="case-card-img cs1"><img src="https://cdn.prod.website-files.com/68f913f6cb961e6fd2480086/6a17524f537663b7d1724c55_Bio-stream%20(2).png" alt="Bio-Stream case study cover" loading="lazy" width="344" height="160"></div>
         <div class="case-body">
           <div class="meta">May 2026 · Climate</div>
           <h3>Bio-Stream</h3>
@@ -776,7 +923,7 @@
         </div>
       </a>
       <a class="case-card" style="--i:1" href="/case-study/learn-why-brilliant-harvest-worked-with-funding-catalyst-for-all-their-non-dilutive-funding-needs">
-        <div class="case-card-img cs2"><img src="https://cdn.prod.website-files.com/68f913f6cb961e6fd2480086/68f913f6cb961e6fd24804e5_Light%20Template.png" alt="Brilliant Harvest case study cover" loading="lazy width="344" height="160"></div>
+        <div class="case-card-img cs2"><img src="https://cdn.prod.website-files.com/68f913f6cb961e6fd2480086/68f913f6cb961e6fd24804e5_Light%20Template.png" alt="Brilliant Harvest case study cover" loading="lazy" width="344" height="160"></div>
         <div class="case-body">
           <div class="meta">Jan 2026 · AgTech</div>
           <h3>Brilliant Harvest</h3>
@@ -784,7 +931,7 @@
         </div>
       </a>
       <a class="case-card" style="--i:2" href="/case-study/helping-verge-ag-unlock-non-dilutive-funding-to-accelerate-the-path-toward-autonomous-farming">
-        <div class="case-card-img cs3"><img src="https://cdn.prod.website-files.com/68f913f6cb961e6fd2480086/69601a82adb6c21506c865d9_Verge%20%20(1).png" alt="Verge Ag case study cover" loading="lazy width="344" height="160"></div>
+        <div class="case-card-img cs3"><img src="https://cdn.prod.website-files.com/68f913f6cb961e6fd2480086/69601a82adb6c21506c865d9_Verge%20%20(1).png" alt="Verge Ag case study cover" loading="lazy" width="344" height="160"></div>
         <div class="case-body">
           <div class="meta">Jan 2026 · AgTech</div>
           <h3>Verge Ag</h3>
@@ -804,42 +951,42 @@
     <p class="section-sub" data-reveal>Based in Canada. You get a dedicated lead who knows your technology, your numbers, and your roadmap — for the life of the engagement.</p>
     <div class="team-grid" data-stagger>
       <div class="team-card" style="--i:0">
-        <div class="team-avatar"><img src="https://cdn.prod.website-files.com/68f913f6cb961e6fd2480086/68f913f6cb961e6fd248052b_Screenshot%202025-07-25%20at%202.19.37%E2%80%AFPM.png" alt="Dr. Ania Sergeenko" loading="lazy width="72" height="72"></div>
+        <div class="team-avatar"><img src="https://cdn.prod.website-files.com/68f913f6cb961e6fd2480086/68f913f6cb961e6fd248052b_Screenshot%202025-07-25%20at%202.19.37%E2%80%AFPM.png" alt="Dr. Ania Sergeenko" loading="lazy" width="72" height="72"></div>
         <div class="team-name">Dr. Ania Sergeenko</div>
         <div class="team-role">Managing Director</div>
       </div>
       <div class="team-card" style="--i:1">
-        <div class="team-avatar"><img src="https://cdn.prod.website-files.com/68f913f6cb961e6fd2480086/695e9a040e89333f9d240af4_Screenshot%202026-01-07%20at%2010.37.57%E2%80%AFAM.png" alt="Erin Creegan-Dougherty, MBA" loading="lazy width="72" height="72"></div>
+        <div class="team-avatar"><img src="https://cdn.prod.website-files.com/68f913f6cb961e6fd2480086/695e9a040e89333f9d240af4_Screenshot%202026-01-07%20at%2010.37.57%E2%80%AFAM.png" alt="Erin Creegan-Dougherty, MBA" loading="lazy" width="72" height="72"></div>
         <div class="team-name">Erin Creegan-Dougherty, MBA</div>
         <div class="team-role">Portfolio Lead</div>
       </div>
       <div class="team-card" style="--i:2">
-        <div class="team-avatar"><img src="https://cdn.prod.website-files.com/68f913f6cb961e6fd2480086/68f913f6cb961e6fd2480527_Screenshot%202025-07-25%20at%202.01.56%E2%80%AFPM.png" alt="Dr. Lindsay Phillips" loading="lazy width="72" height="72"></div>
+        <div class="team-avatar"><img src="https://cdn.prod.website-files.com/68f913f6cb961e6fd2480086/68f913f6cb961e6fd2480527_Screenshot%202025-07-25%20at%202.01.56%E2%80%AFPM.png" alt="Dr. Lindsay Phillips" loading="lazy" width="72" height="72"></div>
         <div class="team-name">Dr. Lindsay Phillips</div>
         <div class="team-role">Funding Strategist</div>
       </div>
       <div class="team-card" style="--i:3">
-        <div class="team-avatar"><img src="https://cdn.prod.website-files.com/68f913f6cb961e6fd2480086/695e9c5fd26e9b353e50f6bf_Screenshot%202026-01-07%20at%2010.48.03%E2%80%AFAM.png" alt="Victoria Fong, MASc" loading="lazy width="72" height="72"></div>
+        <div class="team-avatar"><img src="https://cdn.prod.website-files.com/68f913f6cb961e6fd2480086/695e9c5fd26e9b353e50f6bf_Screenshot%202026-01-07%20at%2010.48.03%E2%80%AFAM.png" alt="Victoria Fong, MASc" loading="lazy" width="72" height="72"></div>
         <div class="team-name">Victoria Fong, MASc</div>
         <div class="team-role">Funding Strategist</div>
       </div>
       <div class="team-card" style="--i:4">
-        <div class="team-avatar"><img src="https://cdn.prod.website-files.com/68f913f6cb961e6fd2480086/695e99525683dfda39025fcb_Screenshot%202026-01-07%20at%2010.33.35%E2%80%AFAM.png" alt="Aida Vien, MBT" loading="lazy width="72" height="72"></div>
+        <div class="team-avatar"><img src="https://cdn.prod.website-files.com/68f913f6cb961e6fd2480086/695e99525683dfda39025fcb_Screenshot%202026-01-07%20at%2010.33.35%E2%80%AFAM.png" alt="Aida Vien, MBT" loading="lazy" width="72" height="72"></div>
         <div class="team-name">Aida Vien, MBT</div>
         <div class="team-role">Funding Strategist</div>
       </div>
       <div class="team-card" style="--i:5">
-        <div class="team-avatar"><img src="https://cdn.prod.website-files.com/68f913f6cb961e6fd2480086/69e9388ac52904bd338be1b5_Screenshot%202026-04-22%20at%203.06.34%E2%80%AFPM.png" alt="Dr. Tarun Chari" loading="lazy width="72" height="72"></div>
+        <div class="team-avatar"><img src="https://cdn.prod.website-files.com/68f913f6cb961e6fd2480086/69e9388ac52904bd338be1b5_Screenshot%202026-04-22%20at%203.06.34%E2%80%AFPM.png" alt="Dr. Tarun Chari" loading="lazy" width="72" height="72"></div>
         <div class="team-name">Dr. Tarun Chari</div>
         <div class="team-role">Funding Strategist</div>
       </div>
       <div class="team-card" style="--i:6">
-        <div class="team-avatar"><img src="https://cdn.prod.website-files.com/68f913f6cb961e6fd2480086/69e939f2a915c4d2e388dff8_Screenshot%202026-04-22%20at%203.13.08%E2%80%AFPM.png" alt="Dr. Nathalia Lara" loading="lazy width="72" height="72"></div>
+        <div class="team-avatar"><img src="https://cdn.prod.website-files.com/68f913f6cb961e6fd2480086/69e939f2a915c4d2e388dff8_Screenshot%202026-04-22%20at%203.13.08%E2%80%AFPM.png" alt="Dr. Nathalia Lara" loading="lazy" width="72" height="72"></div>
         <div class="team-name">Dr. Nathalia Lara</div>
         <div class="team-role">Funding Strategist</div>
       </div>
       <div class="team-card" style="--i:7">
-        <div class="team-avatar"><img src="https://cdn.prod.website-files.com/68f913f6cb961e6fd2480086/695e9a9d276fde54602fa405_Screenshot%202026-01-07%20at%2010.40.32%E2%80%AFAM.png" alt="Anup Jay, MBT" loading="lazy width="72" height="72"></div>
+        <div class="team-avatar"><img src="https://cdn.prod.website-files.com/68f913f6cb961e6fd2480086/695e9a9d276fde54602fa405_Screenshot%202026-01-07%20at%2010.40.32%E2%80%AFAM.png" alt="Anup Jay, MBT" loading="lazy" width="72" height="72"></div>
         <div class="team-name">Anup Jay, MBT</div>
         <div class="team-role">Delivery Support Specialist</div>
       </div>
@@ -853,7 +1000,7 @@
     <div class="section-label" data-reveal>What founders say</div>
     <blockquote data-reveal>"The biggest value wasn't the funding they secured — it was the calls where they told us an application wasn't worth our time. That's the difference between a writer and a partner."</blockquote>
     <div class="quote-attribution" data-reveal>
-      <div class="quote-avatar"><img src="https://cdn.theorg.com/414d6b74-d1fb-4f2a-b0cc-9589587367dc_thumb.jpg" alt="Ammar Memon" width="52" height="52</div>
+      <div class="quote-avatar"><img src="https://cdn.theorg.com/414d6b74-d1fb-4f2a-b0cc-9589587367dc_thumb.jpg" alt="Ammar Memon" width="52" height="52"></div>
       <div>
         <div class="name">Ammar Memon</div>
         <div class="role">Co-founder &amp; COO, Quickly</div>
@@ -1031,25 +1178,76 @@
     });
   });
 
-  // HERO EMAIL CAPTURE
-  document.getElementById('qualify-form').addEventListener('submit', function (e) {
-    e.preventDefault();
-    const email = document.getElementById('email').value;
-    const r = document.getElementById('result-area');
-    const ok = email.includes('@') && email.includes('.');
-    const showResult = () => {
-      if (ok) {
-        r.className = 'hero-form-result show success';
-        r.innerHTML = '<strong>✅ Thanks.</strong> We\'ll review and email you within 1 business day.';
-      } else {
-        r.className = 'hero-form-result show no-fit';
-        r.innerHTML = 'Please enter a valid work email.';
-      }
-    };
-    if (reduceMotion) { showResult(); } else {
-      this.style.transition = 'opacity .3s, transform .3s'; this.style.opacity = '0'; this.style.transform = 'translateY(-6px)';
-      setTimeout(() => { this.style.display = 'none'; showResult(); }, 300);
+  // HERO FORM — two-stage capture, height-collapse swap
+  const form1 = document.getElementById('qualify-form');
+  const form2 = document.getElementById('qualify-form-2');
+  const wrap1 = document.querySelector('.hero-form-wrap');
+  const wrap2 = document.querySelector('.qualify-stage-2-wrap');
+  const resultArea = document.getElementById('result-area');
+
+  // STAGE 1 → 2 — collapse stage 1, open stage 2, overlap in time
+  const transitionToStage2 = () => {
+    resultArea.className = 'hero-form-result';   // clear any stale error/success
+    resultArea.innerHTML = '';
+    wrap1.classList.add('collapsed');   // height 1fr → 0fr
+    wrap2.classList.add('open');         // height 0fr → 1fr (both animate together)
+    const nameField = document.getElementById('q2-name');
+    if (nameField && !reduceMotion) {
+      setTimeout(() => nameField.focus({ preventScroll: true }), 420); // after expand
     }
+  };
+  form1.addEventListener('submit', function (e) {
+    e.preventDefault();
+    const email = document.getElementById('email').value.trim();
+    const ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    if (!ok) {
+      resultArea.className = 'hero-form-result show no-fit';
+      resultArea.innerHTML = 'Please enter a valid work email.';
+      return;
+    }
+    // TODO: integrate HubSpot — hbspt.forms.create / fetch() to endpoint with { email }
+    transitionToStage2();
+  });
+
+  // ICP "None of the above" mutex — prevents contradictory selections
+  const icpGrid = document.getElementById('icp-grid');
+  const noneBox = document.getElementById('icp-none');
+  const icpQualifiers = icpGrid.querySelectorAll('input[name="icp_qualifiers"]:not(#icp-none)');
+  noneBox.addEventListener('change', () => {
+    if (noneBox.checked) icpQualifiers.forEach(b => b.checked = false);
+  });
+  icpQualifiers.forEach(b => b.addEventListener('change', () => {
+    if (b.checked) noneBox.checked = false;
+  }));
+
+  // STAGE 2 — validate qualifying fields, then collapse + success
+  form2.addEventListener('submit', function (e) {
+    e.preventDefault();
+    const name = document.getElementById('q2-name');
+    const company = document.getElementById('q2-company');
+    const website = document.getElementById('q2-website');
+    const region = document.getElementById('q2-region');
+    const notes = document.getElementById('q2-notes');
+    const checks = document.getElementById('icp-grid');
+    const icpChecked = icpGrid.querySelectorAll('input[name="icp_qualifiers"]:checked');
+
+    let valid = true;
+    [name, company, website, region, notes].forEach(f => {
+      if (!f.value.trim()) { f.setAttribute('aria-invalid', 'true'); valid = false; }
+      else f.removeAttribute('aria-invalid');
+    });
+    if (icpChecked.length === 0) { checks.setAttribute('aria-invalid', 'true'); valid = false; }
+    else checks.removeAttribute('aria-invalid');
+    if (!valid) return;
+
+    // TODO: integrate HubSpot — submit:
+    //   { email, name, company, website, funding_region, icp_qualifiers[], discovery_notes }
+    // All leads collected; AE filters non-CA later in CRM.
+    wrap2.classList.remove('open');       // collapse stage 2
+    setTimeout(() => {
+      resultArea.className = 'hero-form-result show success';
+      resultArea.innerHTML = '<strong>✅ Thanks.</strong> ' + name.value.split(' ')[0] + ', we\'ll review and reply within 1 business day.';
+    }, reduceMotion ? 0 : 360);
   });
 })();
 </script>
